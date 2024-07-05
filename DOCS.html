@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentación de API de Noticias</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      padding: 20px;
+    }
+    h1, h2, h3 {
+      color: #333;
+    }
+    h2 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+    .endpoint {
+      margin-bottom: 20px;
+    }
+    .endpoint-description {
+      margin-bottom: 10px;
+    }
+    .endpoint-example {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .endpoint-example code {
+      display: block;
+      margin: 5px 0;
+      padding: 5px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    .response {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .response code {
+      display: block;
+      margin: 5px 0;
+      padding: 5px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    .error {
+      color: #d9534f;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Documentación de API de Noticias</h1>
+
+  <div class="endpoint">
+    <h2>Obtener Artículos</h2>
+    <p class="endpoint-description">Recupera una lista de artículos de noticias basados en los parámetros de búsqueda y filtrado proporcionados.</p>
+    <div class="endpoint-example">
+      <h3>Ejemplo de Solicitud</h3>
+      <code>GET /api/articles?query=bitcoin&category=technology&pageSize=5</code>
+    </div>
+    <div class="response">
+      <h3>Respuesta Exitosa</h3>
+      <code>
+        {
+          "status": "success",
+          "data": [
+            {
+              "title": "Artículo 1",
+              "description": "Descripción del artículo 1",
+              "author": "Autor del artículo 1",
+              "publishedAt": "2024-07-05T12:00:00Z",
+              ...
+            },
+            {
+              "title": "Artículo 2",
+              "description": "Descripción del artículo 2",
+              "author": "Autor del artículo 2",
+              "publishedAt": "2024-07-05T11:00:00Z",
+              ...
+            },
+            ...
+          ]
+        }
+      </code>
+    </div>
+    <div class="response">
+      <h3>Ejemplo de Error</h3>
+      <code class="error">
+        {
+          "status": "error",
+          "message": "Error al recuperar los artículos"
+        }
+      </code>
+      <p>Posibles errores:</p>
+      <ul>
+        <li><strong>404 Not Found:</strong> Cuando no se encuentran artículos que coincidan con los criterios de búsqueda.</li>
+        <li><strong>500 Internal Server Error:</strong> Error interno del servidor al procesar la solicitud.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="endpoint">
+    <h2>Obtener Eventos Destacados (Breaking Events)</h2>
+    <p class="endpoint-description">Recupera una lista de eventos de última hora basados en los parámetros de búsqueda y filtrado proporcionados.</p>
+    <div class="endpoint-example">
+      <h3>Ejemplo de Solicitud</h3>
+      <code>GET /api/breaking-events?category=politics&pageSize=3</code>
+    </div>
+    <div class="response">
+      <h3>Respuesta Exitosa</h3>
+      <code>
+        {
+          "status": "success",
+          "data": [
+            {
+              "title": "Evento 1",
+              "description": "Descripción del evento 1",
+              "source": "Fuente del evento 1",
+              "publishedAt": "2024-07-05T14:00:00Z",
+              ...
+            },
+            {
+              "title": "Evento 2",
+              "description": "Descripción del evento 2",
+              "source": "Fuente del evento 2",
+              "publishedAt": "2024-07-05T13:00:00Z",
+              ...
+            },
+            ...
+          ]
+        }
+      </code>
+    </div>
+    <div class="response">
+      <h3>Ejemplo de Error</h3>
+      <code class="error">
+        {
+          "status": "error",
+          "message": "Error al recuperar eventos destacados"
+        }
+      </code>
+      <p>Posibles errores:</p>
+      <ul>
+        <li><strong>500 Internal Server Error:</strong> Error interno del servidor al procesar la solicitud.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="endpoint">
+    <h2>Obtener Detalles de un Artículo por ID</h2>
+    <p class="endpoint-description">Obtiene los detalles completos de un artículo específico utilizando su identificador único.</p>
+    <div class="endpoint-example">
+      <h3>Ejemplo de Solicitud</h3>
+      <code>GET /api/articles/12345</code>
+    </div>
+    <div class="response">
+      <h3>Respuesta Exitosa</h3>
+      <code>
+        {
+          "status": "success",
+          "data": {
+            "title": "Artículo 12345",
+            "description": "Descripción del artículo 12345",
+            "author": "Autor del artículo 12345",
+            "publishedAt": "2024-07-05T10:00:00Z",
+            ...
+          }
+        }
+      </code>
+    </div>
+    <div class="response">
+      <h3>Ejemplo de Error</h3>
+      <code class="error">
+        {
+          "status": "error",
+          "message": "Artículo no encontrado"
+        }
+      </code>
+      <p>Posibles errores:</p>
+      <ul>
+        <li><strong>404 Not Found:</strong> Cuando el artículo con el ID especificado no se encuentra.</li>
+        <li><strong>500 Internal Server Error:</strong> Error interno del servidor al procesar la solicitud.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="endpoint">
+    <h2>Estado de la API</h2>
+    <p class="endpoint-description">Verifica el estado de la API para asegurarse de que esté en funcionamiento.</p>
+    <div class="endpoint-example">
+      <h3>Ejemplo de Solicitud</h3>
+      <code>GET /api/health</code>
+    </div>
+    <div class="response">
+      <h3>Respuesta Exitosa</h3>
+      <code>
+        {
+          "status": "API is running",
+          "newsAPIConnection": "OK"
+        }
+      </code>
+    </div>
+    <div class="response">
+      <h3>Ejemplo de Error</h3>
+      <code class="error">
+        {
+          "status": "error",
+          "message": "Error al verificar la conexión con la API de noticias"
+        }
+      </code>
+      <p>Posibles errores:</p>
+      <ul>
+        <li><strong>503 Service Unavailable:</strong> Cuando la API de noticias no está disponible.</li>
+        <li><strong>500 Internal Server Error:</strong> Error interno del servidor al procesar la solicitud.</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>
